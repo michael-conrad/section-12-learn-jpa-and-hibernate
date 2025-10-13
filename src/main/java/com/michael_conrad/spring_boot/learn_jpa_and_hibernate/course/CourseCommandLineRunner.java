@@ -17,12 +17,30 @@ public class CourseCommandLineRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         int id = 0;
 
+        System.out.println("save");
         repository.save(new Course(++id, "Learn AWS Now!", "in28minutes"));
+        System.out.println("save");
         repository.save(new Course(++id, "Learn Azure Now!", "in28minutes"));
+        System.out.println("save");
         repository.save(new Course(++id, "Learn DevOps Now!", "in28minutes"));
+        System.out.println("delete");
         repository.deleteById(1L);
+        System.out.println("find");
 
         System.out.println(repository.findById(2L));
         System.out.println(repository.findById(3L));
+
+        System.out.println(repository.findAll());
+        System.out.println(repository.count());
+
+        System.out.println("=== author");
+        repository.findByAuthor("in28minutes").forEach(System.out::println);
+        System.out.println("=== author (blank)");
+        repository.findByAuthor("").forEach(System.out::println);
+
+        System.out.println("=== name");
+        repository.findByName("Learn DevOps Now!").forEach(System.out::println);
+        System.out.println("=== name (blank)");
+        repository.findByName("").forEach(System.out::println);
     }
 }
